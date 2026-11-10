@@ -1,0 +1,1 @@
+{"name":"MedPro — pack evidence & follow-up","short_name":"MedPro","start_url":"/","scope":"/","display":"standalone","background_color":"#f4f9f8","theme_color":"#255b5b","icons":[{"src":"/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}],"shortcuts":[{"name":"My cabinet","url":"/#cabinet"},{"name":"Quality history","url":"/#alerts"}]}

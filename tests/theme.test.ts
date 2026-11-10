@@ -1,0 +1,6 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import {resolveTheme,themeBootScript} from '../lib/theme';
+test('explicit choice takes precedence over system preference; invalid or absent choices follow the device',()=>{assert.equal(resolveTheme('light',true),'light');assert.equal(resolveTheme('dark',false),'dark');assert.equal(resolveTheme(null,true),'dark');assert.equal(resolveTheme('invalid',false),'light');});
+test('pre-paint theme script applies colour scheme and handles blocked storage',()=>{for(const [stored,system,expected] of [['dark',false,'dark'],['light',true,'light'],[null,true,'dark']] as const){const root={dataset:{theme:''},style:{colorScheme:''}};vm.runInNewContext(themeBootScript,{document:{documentElement:root},localStorage:{getItem:()=>stored},matchMedia:()=>({matches:system})});assert.equal(root.dataset.theme,expected);assert.equal(root.style.colorScheme,expected);}const root={dataset:{theme:''},style:{colorScheme:''}};vm.runInNewContext(themeBootScript,{document:{documentElement:root},localStorage:{getItem:()=>{throw Error('blocked');}},matchMedia:()=>({matches:true})});assert.equal(root.dataset.theme,'dark');});

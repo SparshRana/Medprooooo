@@ -1,0 +1,6 @@
+import {NextResponse} from 'next/server';
+import {findMedicineAlternative} from '@/lib/offline-medical';
+export const runtime='nodejs';
+function resolve(q:unknown){if(typeof q!=='string'||q.trim().length<2||q.length>100)return NextResponse.json({success:false,error:'Enter a medicine name of 2–100 characters.'},{status:400});const candidate=findMedicineAlternative(q);if(!candidate)return NextResponse.json({success:false,error:'No supported name candidate was found. Check the printed name or enter pack details manually. This does not mean the medicine is unrecognized or invalid.'},{status:404});return NextResponse.json({success:true,data:{candidate:{salt:candidate.salt,strength:candidate.strength,form:candidate.form,release:candidate.release,source:candidate.source},verification:'name-candidate-only',comparison:null,message:'Confirm every field on the real pack. No current price, interchangeability or treatment instructions have been verified.'}},{headers:{'Cache-Control':'no-store'}});}
+export async function GET(request:Request){return resolve(new URL(request.url).searchParams.get('q'));}
+export async function POST(request:Request){try{const body=await request.json();return resolve(body.q||body.query);}catch{return NextResponse.json({error:'Enter a valid medicine query.'},{status:400});}}

@@ -1,0 +1,21 @@
+{
+  "evaluatedAt": "2026-11-10T08:50:58.282Z",
+  "sourceSnapshot": "2026-10-29T16:27:25.345Z",
+  "sourceRecords": 7005,
+  "method": "100 deterministic historical-record identities and four negative/incomplete variants per identity. Three synthetic printed-text transcripts. No model training. Same-record identity challenge, not independent clinical validation.",
+  "positiveCases": 100,
+  "negativeAndIncompleteCases": 400,
+  "exactMatches": 100,
+  "missedExpectedMatches": 0,
+  "falseExactMatches": 0,
+  "candidateResults": 300,
+  "elapsedMs": 6.2,
+  "printedTranscriptFixtures": 3,
+  "printedTranscriptMatches": 3,
+  "limits": [
+    "No real-photo OCR accuracy claim; transcript parsing is not OCR evaluation.",
+    "No manual-user baseline or pilot has been measured.",
+    "Results do not establish medicine safety, authenticity, population accuracy or harm reduction.",
+    "Records missing a confirmable manufacturer can remain candidates by design."
+  ]
+}

@@ -1,7 +1,7 @@
-# MedPro source provenance
+# Source provenance
 
-This project is copied with the project owner's instruction from https://github.com/charvi52/medpro at commit `416a9d72a2eee7c8933cda3fc7d3d954d2a25f14`.
+Copied at the project owner's request from https://github.com/charvi52/medpro, commit `416a9d72a2eee7c8933cda3fc7d3d954d2a25f14`.
 
-Original authors: Charvi Naresh and Sparsh Rana. Existing third-party notices are retained. All modifications in this repository are independent of the source repository. No source-repository writes, pull requests, settings or deployments are performed.
+Original authors: Charvi Naresh and Sparsh Rana. Original assets, server routes, database schema, historical dataset and third-party notices are retained. Improvements belong to this independent copy. No source-repository write, branch, pull request, settings change or deployment was performed.
 
-The application remains a prototype. Availability of external accounts, notifications and professional verification depends on setup and testing documented in this repository.
+The local source remote has a disabled push URL. The destination is exclusively https://github.com/SparshRana/Medprooooo.

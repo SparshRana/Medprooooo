@@ -1,0 +1,4 @@
+import {normalize,manufacturerKey,batchKey,type QualityAlert} from './quality-alerts';
+const identity=(r:QualityAlert)=>JSON.stringify([r.kind,r.period,normalize(r.product),manufacturerKey(r.manufacturer||r.manufacturedBy),batchKey(r.batch)]);
+const finding=(r:QualityAlert)=>JSON.stringify([r.issue,r.remarks,r.firmReply,r.expiry,r.manufactured]);
+export function alertRevisions(before:QualityAlert[],after:QualityAlert[]){const previous=new Map(before.map(r=>[identity(r),r]));const next=new Map(after.map(r=>[identity(r),r]));return {added:after.filter(r=>!previous.has(identity(r))),changed:after.filter(r=>previous.has(identity(r))&&finding(previous.get(identity(r))!)!==finding(r)).map(r=>({before:previous.get(identity(r))!,after:r})),notPresent:before.filter(r=>!next.has(identity(r))),note:'A record missing from the next checked dataset is not proof of withdrawal or clearance. Read the official source.'};}
