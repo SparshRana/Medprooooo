@@ -49,3 +49,6 @@ AGENTS.local.md
 # Rebuilt from pinned OCR dependencies
 /public/ocr/
 !.env.example
+
+# Local Vercel project link and credentials
+.vercel/

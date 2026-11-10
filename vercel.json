@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "installCommand": "npx --yes pnpm@11.25.0 install --frozen-lockfile",
+  "buildCommand": "npx --yes pnpm@11.25.0 run build",
+  "functions": {
+    "app/api/recalls/route.ts": { "maxDuration": 30 },
+    "app/api/medicine/search/route.ts": { "maxDuration": 30 },
+    "app/api/medicine/barcode/route.ts": { "maxDuration": 30 }
+  }
+}

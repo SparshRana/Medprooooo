@@ -21,3 +21,6 @@ export async function loadAlerts(){
  const coverage=stored.coverage.filter(c=>!replaced.has(`${c.kind}:${c.period}`)).concat(live.coverage);
  return {records,coverage,snapshotAt:stored.generatedAt,checkedAt:live.checkedAt,liveAvailable:live.failures.length===0,failures:[...stored.failures,...live.failures],liveFailures:live.failures};
 }
+
+/** Keep a pending source check alive after the serverless response. */
+export async function finishAlertRefresh(){if(pending)await pending;}

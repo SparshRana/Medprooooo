@@ -17,6 +17,6 @@ export const metadata:Metadata={
   type:'website',
  },
  twitter:{card:'summary_large_image',images:['/og-card.jpg']},
- ...(process.env.NEXT_PUBLIC_SITE_URL?{metadataBase:new URL(process.env.NEXT_PUBLIC_SITE_URL)}:{metadataBase:new URL('http://localhost:3000')}),
+ ...(process.env.NEXT_PUBLIC_SITE_URL?{metadataBase:new URL(process.env.NEXT_PUBLIC_SITE_URL)}:{metadataBase:new URL(process.env.VERCEL_PROJECT_PRODUCTION_URL?'https://'+process.env.VERCEL_PROJECT_PRODUCTION_URL:process.env.VERCEL_URL?'https://'+process.env.VERCEL_URL:'http://localhost:3000')}),
 };
 export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{__html:themeBootScript}}/></head><body><ThemeProvider>{children}</ThemeProvider></body></html>;}

@@ -1,5 +1,5 @@
-import {NextResponse} from 'next/server';
-import {loadAlerts} from '@/lib/alert-store';
+import {NextResponse,after} from 'next/server';
+import {loadAlerts,finishAlertRefresh} from '@/lib/alert-store';
 import {CDSCO_PORTAL,type AlertQuery} from '@/lib/quality-alerts';
 import {historyResult} from '@/lib/history-result';
 export const runtime='nodejs';
@@ -10,6 +10,7 @@ export async function GET(request:Request){
  const offset=Number(params.get('offset')||'0');if(!Number.isInteger(offset)||offset<0||offset>100000)return NextResponse.json({error:'Invalid result offset.'},{status:400});
  try{
   const data=await loadAlerts();
+  after(()=>finishAlertRefresh());
   return NextResponse.json({supported:true,region:'IN',query,...historyResult(data,query,offset),sourceUrl:CDSCO_PORTAL,distributionHistory:{available:false,message:'Manufacturing and expiry dates appear only when reported in a quality alert. Distribution, ownership and full manufacturing history are not supplied by this source.'},warning:'These are published NSQ/spurious reports, not a complete recall register or an authenticity check. Missing results do not establish safety. Ask a pharmacist or doctor about treatment; do not change treatment based on this result.'},{headers:{'Cache-Control':'no-store'}});
  }catch{ return NextResponse.json({supported:true,state:'unavailable',label:'Alert check unavailable',records:[],error:'Official history could not be loaded. Check the CDSCO portal directly.',sourceUrl:CDSCO_PORTAL},{status:503,headers:{'Cache-Control':'no-store'}});}
 }
